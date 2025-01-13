@@ -48,3 +48,45 @@ export default tseslint.config({
   },
 })
 ```
+# CineApp - Proyecto Frontend con React y Tailwind CSS
+
+Este proyecto es una aplicación web para buscar, ver detalles y marcar películas como favoritas. Se consume la API de [TMDb (The Movie Database)](https://www.themoviedb.org/) y utiliza **React**, **TypeScript**, **Tailwind CSS** y otras herramientas modernas.
+
+## Características
+
+- Página de inicio con películas populares.
+- Barra de búsqueda para encontrar películas por título.
+- Página de detalles de cada película con información completa.
+- Funcionalidad para marcar películas como favoritas y almacenarlas en el navegador (LocalStorage).
+- Diseño responsivo y atractivo utilizando Tailwind CSS.
+- Modales para mostrar información adicional y realizar registros.
+
+## Tecnologías y Dependencias
+
+- **React**: Librería para construir interfaces de usuario.
+- **TypeScript**: Superset de JavaScript que añade tipado estático.
+- **Tailwind CSS**: Framework CSS para diseños rápidos y personalizados.
+- **React Icons**: Iconos vectoriales listos para usar en React.
+- **Axios**: Cliente HTTP para consumir la API de TMDb.
+- **Vite**: Herramienta para crear proyectos rápidos y modernos de React.
+
+### Dependencias instaladas
+
+- **React** y **React DOM**: Framework principal y su motor para el DOM.
+- **TypeScript**: Para tipar el código.
+- **Tailwind CSS**: Para estilos.
+- **React Icons**: Para iconos vectoriales.
+- **Axios**: Para realizar peticiones HTTP.
+
+## Requisitos Previos
+
+- Node.js (versión 16 o superior recomendada)
+- npm o yarn instalado en tu máquina.
+
+## Pasos para Configurar y Ejecutar el Proyecto
+
+### 1. Clonar el Repositorio
+Clona este repositorio en tu máquina local:
+```bash
+git clone https://github.com/NickQ2003/my-cine.git
+cd my-cine

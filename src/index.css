@@ -67,23 +67,12 @@ button:focus-visible {
   button {
     background-color: #beb8b8;
   }
-  main {
-    color: red;
-  }
 }
 
 @layer components {
   .btn-primary {
     @apply bg-primary text-white py-2 px-4 rounded-lg hover:bg-secondary justify-end;
   }
-  .card{
-    @apply bg-red-500;
-  }
-  .table-cell {
-    @apply bg-white;
-  }
-  .myCard {
-    @apply bg-blue-800;
-  }
+  
 }
 
