@@ -1,18 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head className="w-full bg-slate-200 justify-end " >
-    <div className="flex items-center bg-gray-100 rounded-full p-4 shadow-md">
-      <input
-        type="text"
-        placeholder="Buscar películas..."
-        className="flex-1 bg-transparent outline-none text-gray-800 px-4"
-      />
-      <button className="bg-primary text-white px-6 py-2 rounded-full">Buscar</button>
-    </div>
-    
-  </head>
   <body>
-    <div id="root"></div>
+    <header>
+      <a>
+      <img src="./src/image/Logo.png" alt="company pop-corn-logo" class="logo-img"> 
+      </a>
+      <nav>
+        <div class="a">
+        <a href="#" class="nav-link">popular</a>
+        <a href="#" class="nav-link">favorito</a>
+        </div>
+        <div class="img">
+          <img src="./src/image/Vector.png" class="nav-link"></img>
+        </div>
+      </nav>
+    </header>
+    
+    <div id="root" className="flex w-full h-10"></div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
