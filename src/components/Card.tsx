@@ -1,7 +1,6 @@
-import { FaHeart } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Register from "../pages/Register";
-
+import ModalInfo from "../pages/modalInfo";
 interface CardProps {
   title: string;
   description: string;
@@ -9,81 +8,88 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, description, image }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false); 
 
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setRegisterModalOpen(false);
+  };
+  const handleOutsideClick = (event: MouseEvent) => {
+    const modalElement = document.querySelector(".modal");
+    if (
+      modalElement &&
+      !modalElement.contains(event.target as Node) &&
+      (isModalOpen || isRegisterModalOpen)
+    ) {
+      closeModal();
+    }
+  };
+  useEffect(() => {
+    if (isModalOpen || isRegisterModalOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isModalOpen, isRegisterModalOpen]);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(false); 
+    setRegisterModalOpen(true); 
+  };
+
   return (
     <div>
-        <div id="root">
-            <div className="listado-pelis">
-            <div className="card">
-                <figure className="margen">
-                <img
-                    alt={title}
-                    src={"https://image.tmdb.org/t/p/w200/" + image}
-                    className="card-img"
-                />
-                </figure>
-                <div className="enter-card">
-                <h4 className="text-card">{title}</h4>
-                <p className="parrafo">
-                    {truncateText(description, 100)}
-                </p>
-                <div className="informativo">
-                    <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                    onClick={() => setIsModalOpen(true)}
-                    >
-                    Saber Más
-                    </button>
-                    
-                </div>
-                </div>
+      <div id="root">
+        <div className="listado-pelis">
+          <div className="card">
+            <figure className="margen">
+              <img
+                alt={title}
+                src={"https://image.tmdb.org/t/p/w200/" + image}
+                className="card-img"
+              />
+            </figure>
+            <div className="enter-card">
+              <h4 className="text-card">{title}</h4>
+              <p className="parrafo">{truncateText(description, 100)}</p>
+              <div className="informativo">
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Saber Más
+                </button>
+              </div>
             </div>
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="modal">
-                    <h2 className="h2">Detalles de {title}</h2>
-                    <p className="parrafo-modal">{description}</p>
-                    <div className="botones-modal">
-                        <button
-                        onClick={() => setIsModalOpen(false)}
-                        className="btn-mod"
-                        >
-                        Cerrar
-                        </button>
-                        <button
-                            onClick={() => setRegisterModalOpen(true)}
-                            className="btn-mod"
-                        >
-                            <FaHeart className="mr-2" /> 
-                            me gusta
-                        </button>
-                    </div>
-                </div>
-                </div>
-            )}
+          </div>
 
-            {isRegisterModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-white rounded-lg p-8 w-96 shadow-lg">
-                    <h2 className="text-xl font-bold mb-4">Registrarse</h2>
-                    <Register />
-                    <button
-                    onClick={() => setRegisterModalOpen(false)}
-                    className="mt-4 bg-red-500 text-white px-4 py-2 rounded w-full"
-                    >
-                    Cerrar
-                    </button>
-                </div>
-                </div>
-            )}
+          {isModalOpen && (
+            <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+              <ModalInfo
+                isModalOpen={isModalOpen}
+                closeModal={closeModal}
+                handleRegisterClick={handleRegisterClick}
+                title={title}
+                description={description}
+              />
             </div>
-        </div>    
+          )}
+          {isRegisterModalOpen && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <Register />
+              </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

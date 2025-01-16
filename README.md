@@ -90,3 +90,31 @@ Clona este repositorio en tu máquina local:
 ```bash
 git clone https://github.com/NickQ2003/my-cine.git
 cd my-cine
+
+# Proyecto React con Vite, TypeScript y Tailwind CSS
+
+Este proyecto está configurado para usar **Vite** como empaquetador, **React** con **TypeScript (TSX)** y **Tailwind CSS** para estilizar los componentes de la interfaz.
+
+## Requisitos
+
+Asegúrate de tener instalado lo siguiente:
+
+- **Node.js**: [Instalar Node.js](https://nodejs.org/)
+- **npm**: Viene con Node.js, por lo que si tienes Node.js, ya tienes npm.
+
+## Pasos para configurar el proyecto
+
+### 1. Crear un Proyecto con Vite
+
+Para comenzar, crea un proyecto nuevo utilizando Vite con la plantilla de React y TypeScript. Abre una terminal y ejecuta el siguiente comando:
+
+```bash
+npm create vite@latest nombre-del-proyecto --template react-ts
+
+
+### despues de instalar todas las dependencias lo debes correr el codigo como desarollador para verlo todo con 
+npm run dev 
+
+# My Cine Project
+
+Visita mi proyecto en [GitHub Pages](https://nickq2003.github.io/my-cine)

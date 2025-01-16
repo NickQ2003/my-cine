@@ -2,31 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Banner from "./Banner";
 
-interface DataItem {
-  id: number;
-  results: [];
-  adult: boolean;
-  poster_path: string;
+interface Movie {
+  backdrop_path: string;
   title: string;
   overview: string;
 }
 
-const banner: React.FC = () => {
-  const [items, setItems] = useState<DataItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const token ="eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YmFjNzE0ZmUwYzg0M2QwZjNjNTU3NTY2M2VlYjMyYiIsIm5iZiI6MTczNTg2NDQ1My4xMzUsInN1YiI6IjY3NzczMDg1YWI1ZWM0YzNkYzcyNDVlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.J6T_fcCqAbmFxVtJGiSMgEFCGnNbf2vBQpfVfYCRZj4";
-  const url = 'https://api.themoviedb.org/3/find/642195?external_source=imdb_id&language=en';
-  const options = {
-  method: 'GET',
-  headers: {
-  accept: 'application/json',
-  }
-};
+const BannerComponent: React.FC = () => {
+    const [movie, setMovie] = useState<Movie | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+  const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YmFjNzE0ZmUwYzg0M2QwZjNjNTU3NTY2M2VlYjMyYiIsIm5iZiI6MTczNTg2NDQ1My4xMzUsInN1YiI6IjY3NzczMDg1YWI1ZWM0YzNkYzcyNDVlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.J6T_fcCqAbmFxVtJGiSMgEFCGnNbf2vBQpfVfYCRZj4";
+  const url = "https://api.themoviedb.org/3/movie/939243";
 
-fetch(url, options)
-  .then(res => res.json())
-  .then(json => console.log(json))
-  .catch(err => console.error(err));
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,36 +23,44 @@ fetch(url, options)
             Authorization: `Bearer ${token}`,
           },
         });
-
-        const changes = response.data.results || [];
-        setItems(changes);
-        console.log(changes);
+  
+        console.log("Response data:", response.data);
+        const movieData = response.data; 
+        setMovie({
+            title: movieData.title,
+            overview: movieData.overview,
+            backdrop_path: movieData.backdrop_path,
+          });
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error || error);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchData();
-  }, []);
-
+  }, [url, token]);
+  
   if (loading) {
     return <div className="text-center text-blue-500">Cargando...</div>;
+
+  }
+  if (!movie) {
+    return <div className="text-center text-blue-500">no se encontro la movie...</div>;
   }
 
   return (
-    <div>
-      {items.map(item => (
-        <Banner
-          key={item.id}
-          title={item.title}
-          description={item.overview}
-          image={item.poster_path}
+    <div className="DonBanner">
+      {
+        <Banner 
+          title={movie.title}
+          description={movie.overview}
+          image={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
+
         />
-      ))}
+      }
     </div>
   );
 };
 
-export default banner;
+export default BannerComponent;

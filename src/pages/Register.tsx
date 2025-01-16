@@ -1,59 +1,113 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Register: React.FC = () => {
+  // Estado para controlar si el modal está abierto o cerrado
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  if (!isModalOpen) {
+    return null; // Si el modal está cerrado, no renderizamos nada
+  }
+
   return (
-    <div className="bg-white p-6 rounded shadow-lg max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Registro</h2>
-      <form>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-            Nombre completo
-          </label>
-          <input
-            type="text"
-            id="name"
-            className="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-            placeholder="Ingresa tu nombre"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-            Correo electrónico
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-            placeholder="Ingresa tu correo"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-            placeholder="Crea una contraseña"
-          />
-          <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
-            Repita su contraseña 
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-            placeholder="Crea una contraseña"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-        >
-          Registrarse
+    <div className="modal-container">
+      <div className="modalR">
+        {/* Botón de cierre con onClick para cerrar el modal */}
+        <button className="close-button" onClick={closeModal}>
+          &times;
         </button>
-      </form>
+        <div className="header">
+          <img src="./src/image/Logo.png" alt="Logo" />
+        </div>
+        <form className="form">
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="first-name" className="form-label">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="first-name"
+                className="space-holder"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="last-name" className="form-label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="last-name"
+                className="space-holder"
+                placeholder="Enter your last name"
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="space-holder"
+              placeholder="Enter your username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="space-holder"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone-number" className="form-label">
+              Ph. Number
+            </label>
+            <input
+              type="tel"
+              id="phone-number"
+              className="space-holder"
+              placeholder="Enter your phone number"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="space-holder"
+              placeholder="Create a password"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirm-password" className="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="confirm-password"
+              className="space-holder"
+              placeholder="Confirm your password"
+            />
+          </div>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
